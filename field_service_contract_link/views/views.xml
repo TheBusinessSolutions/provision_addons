@@ -1,0 +1,101 @@
+<odoo>
+    <data>
+        
+        <record id="view_sale_contract_contract_form_inherit" model="ir.ui.view">
+            <field name="name">sale.order customer contract Inheri</field>
+            <field name="model">sale.order</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="button_open_customer_contract" type="object" class="oe_stat_button" icon="fa-bars">
+                        Contracts
+                    </button>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_contract_contract_form_inherit" model="ir.ui.view">
+            <field name="name">contract field service recurring Inheri</field>
+            <field name="model">contract.contract</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="contract.contract_contract_customer_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="button_open_field_service_recurring" type="object" class="oe_stat_button" icon="fa-bars">
+                        FS. Recurring
+                    </button>
+                </xpath>
+
+
+                <xpath expr="//group[@name='recurring_type']" position="after">
+                    <group>
+                        <group>
+                            <field name="fsm_recurring_template_id" />
+                            <field
+                                name="fsm_order_template_id"
+                                groups="fieldservice.group_fsm_template"
+                            />
+                            <field name="fsm_frequency_set_id" />
+                            <field name="scheduled_duration" />
+                            <field name="max_orders" />
+                        </group>
+                        <group>
+                            <field name="location_id" />
+                            <field name="contact_id" />
+                            <field name="phone" />
+                            
+                            <field
+                                name="team_id"
+                                groups="fieldservice.group_fsm_team"
+                            />
+                            <field name="person_id" />
+                            <field name="company_id" options="{'no_create': True}" groups="base.group_multi_company"/>
+                            <field name="show_order_amount"/>
+                                
+                        </group>
+                    </group>
+                </xpath>
+
+            </field>
+        </record>
+
+
+        <record id="fieldservice_recurring_price_inherit" model="ir.ui.view">
+            <field name="name">fieldservice_recurring.inheritd</field>
+            <field name="model">fsm.recurring</field>
+            <field name="inherit_id" ref="fieldservice_recurring.fsm_recurring_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//header" position="inside">
+                    <button id="add_single_visit" name="add_single_visit" string="Add Single visit" class="oe_highlight" type="object" groups="fieldservice.group_fsm_dispatcher" attrs="{'invisible': [('state', 'in',('close'))]}"/>
+                </xpath>
+
+                
+                <xpath expr="//field[@name='fsm_recurring_template_id']" position="before">
+                    <field name="partner_id" string="Customer"/>
+                </xpath>
+
+                <xpath expr="//field[@name='company_id']" position="after">
+                    <field name="show_order_amount" invisible="1"/>
+                    <field name="total_price_subtotal" string="Order amount" attrs="{'invisible':[('show_order_amount','=',False)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="fieldservice_order_price_inherit" model="ir.ui.view">
+            <field name="name">fieldservice_order.inheritd</field>
+            <field name="model">fsm.order</field>
+            <field name="inherit_id" ref="fieldservice.fsm_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='tag_ids']" position="after">
+                    <field name="show_order_amount" invisible="1"/>
+                    <field name="total_price_subtotal" string="Order amount" attrs="{'invisible':[('show_order_amount','=',False)]}"/>
+                    <field name="last_visit"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>
