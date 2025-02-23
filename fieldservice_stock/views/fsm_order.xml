@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="fieldservice.fsm_order_form" />
         <field name="arch" type="xml">
             <div class="oe_button_box" position="inside">
-                <field name="picking_ids" invisible="1" />
+                <field name="picking_ids" invisible="0" />
                 <button
                     type="object"
                     name="action_view_delivery"
@@ -44,7 +44,7 @@
                     </group>
                     <field
                         name="move_ids"
-                        readonly="1"
+                        readonly="0"
                         attrs="{'invisible': [('move_ids', '=', False)]}"
                     >
                         <tree
@@ -53,8 +53,8 @@
                         >
                             <field name="reference" />
                             <field name="date" widget="date" />
-                            <field name="picking_id" string="Reference" invisible="1" />
-                            <field name="sequence" invisible="1" />
+                            <field name="picking_id" string="Reference" invisible="0" />
+                            <field name="sequence" invisible="0" />
                             <field name="origin" />
                             <field name="product_id" />
                             <field name="product_uom_qty" string="Requested Quantity" />
@@ -69,9 +69,9 @@
                                 string="Unit of Measure"
                                 groups="uom.group_uom"
                             />
-                            <field name="location_id" invisible="1" />
-                            <field name="location_dest_id" invisible="1" />
-                            <field name="create_date" invisible="1" />
+                            <field name="location_id" invisible="0" />
+                            <field name="location_dest_id" invisible="0" />
+                            <field name="create_date" invisible="0" />
                             <field name="state" />
                         </tree>
                     </field>
